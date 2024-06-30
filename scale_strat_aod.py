@@ -25,6 +25,7 @@ lw_aod=aod_550/sw_aod_scaling[2]*lw_aod_scaling
 lw_aod=np.repeat(lw_aod[np.newaxis,:],12,axis=0)
 lw_aod=np.repeat(lw_aod[:,:,np.newaxis],72,axis=2) #--only one hemisphere
 
+#---------------NH files---------------------------
 #--lw tau NH
 lw.TAU_EAR.values=np.zeros((lw.TAU_EAR.shape))
 lw.TAU_EAR.values[:,:,52,0:72]=lw_aod
@@ -42,6 +43,7 @@ sw.OME_SUN.values=np.ones((sw.TAU_SUN.shape))
 sw.to_netcdf('tauswstrat.2D.NH.nc')
 lw.to_netcdf('taulwstrat.2D.NH.nc')
 
+#---------------SH files---------------------------
 #--lw tau SH
 lw.TAU_EAR.values=np.zeros((lw.TAU_EAR.shape))
 lw.TAU_EAR.values[:,:,52,71:]=lw_aod
@@ -58,3 +60,18 @@ sw.OME_SUN.values=np.ones((sw.TAU_SUN.shape))
 #--save to file SH
 sw.to_netcdf('tauswstrat.2D.SH.nc')
 lw.to_netcdf('taulwstrat.2D.SH.nc')
+
+#---------------BASELINE files---------------------------
+#--lw tau BASELINE
+lw.TAU_EAR.values=np.zeros((lw.TAU_EAR.shape))
+
+#--sw tau BASELINE
+sw.TAU_SUN.values=np.zeros((sw.TAU_SUN.shape))
+
+#--sw g and omega BASELINE
+sw.GGG_SUN.values=np.zeros((sw.TAU_SUN.shape))
+sw.OME_SUN.values=np.ones((sw.TAU_SUN.shape))
+
+#--save to file SH
+sw.to_netcdf('tauswstrat.2D.00.nc')
+lw.to_netcdf('taulwstrat.2D.00.nc')
